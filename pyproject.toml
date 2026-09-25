@@ -1,0 +1,16 @@
+[project]
+name = "nyc-tlc-2026-lakehouse-project"
+version = "0.1.0"
+description = "NYC TLC 2026 taxi trip data medallion lakehouse - PySpark bronze/silver, dbt-duckdb gold"
+requires-python = ">=3.10"
+dependencies = [
+    "pyspark>=3.5",
+    "pandas",
+    "pyarrow",
+    "dbt-core>=1.7",
+    "dbt-duckdb",
+    "pytest",
+]
+
+[project.optional-dependencies]
+dev = ["black", "ruff", "pytest-cov"]

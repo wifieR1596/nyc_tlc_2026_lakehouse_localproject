@@ -1,0 +1,9 @@
+# Copy to ~/.dbt/profiles.yml (adjust path if you run dbt from elsewhere).
+nyc_tlc_medallion:
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      path: '../data/gold.duckdb'
+      threads: 4
+      schema: gold

@@ -1,0 +1,74 @@
+version: 2
+
+models:
+  - name: fct_trips
+    description: "One row per taxi trip (Yellow + Green, 2 months). Normalized -- codes only for vendor/ratecode/payment_type/trip_type; fee columns and store_and_forward_flag kept as genuine measures."
+    columns:
+      - name: trip_id
+        data_tests:
+          - unique
+          - not_null
+      - name: taxi_type
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['yellow', 'green']
+      - name: pickup_location_id
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('dim_location')
+                field: location_id
+      - name: vendor_id
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('dim_vendor')
+                field: vendor_id
+      - name: ratecode_id
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('dim_ratecode')
+                field: ratecode_id
+      - name: payment_type
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('dim_payment_type')
+                field: payment_type_id
+      - name: fare_amount
+        data_tests:
+          - not_null
+
+  - name: dim_location
+    columns:
+      - name: location_id
+        data_tests: [unique, not_null]
+
+  - name: dim_vendor
+    description: "Vendor code lookup (dbt seed, from TLC data dictionary)."
+    columns:
+      - name: vendor_id
+        data_tests: [unique, not_null]
+
+  - name: dim_ratecode
+    description: "Rate code lookup (dbt seed)."
+    columns:
+      - name: ratecode_id
+        data_tests: [unique, not_null]
+
+  - name: dim_payment_type
+    description: "Payment type lookup (dbt seed)."
+    columns:
+      - name: payment_type_id
+        data_tests: [unique, not_null]
+
+  - name: dim_trip_type
+    description: "Trip type lookup, Green-only (dbt seed)."
+    columns:
+      - name: trip_type_id
+        data_tests: [unique, not_null]
+
+  - name: fct_monthly_trip_metrics
+    description: "Monthly trip metrics by taxi type and borough. Denormalized reporting mart."

@@ -1,0 +1,18 @@
+name: 'nyc_tlc_medallion'
+version: '1.0.0'
+config-version: 2
+
+profile: 'nyc_tlc_medallion'
+
+model-paths: ["models"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+
+models:
+  nyc_tlc_medallion:
+    staging:
+      +materialized: view
+    intermediate:
+      +materialized: view
+    marts:
+      +materialized: table

@@ -1,0 +1,18 @@
+version: 2
+
+sources:
+  - name: silver
+    description: >
+      Silver layer -- Parquet files written by transform/bronze_to_silver.py.
+      Cleaned per source (filtered, deduped, readability-renamed), NOT yet
+      merged. dbt-duckdb reads these via external_location.
+    tables:
+      - name: yellow_trips
+        meta:
+          external_location: "read_parquet('../data/silver/yellow_trips/*/*.parquet', hive_partitioning=true)"
+      - name: green_trips
+        meta:
+          external_location: "read_parquet('../data/silver/green_trips/*/*.parquet', hive_partitioning=true)"
+      - name: taxi_zone_lookup
+        meta:
+          external_location: "read_parquet('../data/silver/taxi_zone_lookup/*.parquet')"
