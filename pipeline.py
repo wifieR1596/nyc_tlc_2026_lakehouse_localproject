@@ -22,6 +22,7 @@ def run_ingestion_stage():
     print("\n=== Stage 1/3: raw -> bronze ===")
     sys.path.insert(0, str(PROJECT_ROOT / "ingestion"))
     from raw_to_bronze import run_ingestion
+
     run_ingestion()
 
 
@@ -29,6 +30,7 @@ def run_silver_stage():
     print("\n=== Stage 2/3: bronze -> silver ===")
     sys.path.insert(0, str(PROJECT_ROOT / "transform"))
     from bronze_to_silver import transform_bronze_to_silver
+
     transform_bronze_to_silver()
 
 

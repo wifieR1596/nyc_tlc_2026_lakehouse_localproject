@@ -21,14 +21,13 @@ the machine running Airflow, and place (or symlink) this file into your
 Airflow DAGs folder (usually $AIRFLOW_HOME/dags).
 """
 
+import subprocess
 from datetime import datetime
 from pathlib import Path
-import subprocess
 
 from airflow.decorators import dag, task
 
 # TODO: set this to the actual path of this project on the machine
-# running Airflow (e.g. inside WSL2: "/mnt/c/Data Irhas/Career Switch/project_files/nyc-tlc-2026-lakehouse-project")
 PROJECT_ROOT = Path("/path/to/nyc-tlc-2026-lakehouse-project")
 
 
