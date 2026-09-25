@@ -25,3 +25,11 @@ exclude = [
     "dbt_project*",
     "orchestration*",
 ]
+
+[tool.ruff]
+line-length = 100
+target-version = "py314"  # match your Python version
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "W"]  # pycodestyle, pyflakes, isort, warnings
+ignore = []
