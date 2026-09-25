@@ -14,3 +14,14 @@ dependencies = [
 
 [project.optional-dependencies]
 dev = ["black", "ruff", "pytest-cov"]
+
+[tool.setuptools.packages.find]
+include = [
+    "ingestion*",
+    "transform*",
+]
+exclude = [
+    "data*",
+    "dbt_project*",
+    "orchestration*",
+]
